@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Sidebar</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@400;500&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 300px;
+      background: #0d0d0f;
+      color: #e8e4d9;
+      font-family: 'DM Mono', monospace;
+      padding: 24px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #c4956a, #e8b88a);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .title {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 300;
+      color: #e8e4d9;
+    }
+
+    .subtitle {
+      font-size: 10px;
+      color: #7a7672;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #7a7672;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      background: #1a1a1f;
+      border: 1px solid #2a2a30;
+      border-radius: 6px;
+      padding: 10px 12px;
+      color: #e8e4d9;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      border-color: #c4956a;
+    }
+
+    input::placeholder {
+      color: #3a3a42;
+    }
+
+    .hint {
+      font-size: 10px;
+      color: #4a4a52;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .hint a {
+      color: #c4956a;
+      text-decoration: none;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 16px;
+      padding: 11px;
+      background: linear-gradient(135deg, #c4956a, #d4a57a);
+      border: none;
+      border-radius: 6px;
+      color: #0d0d0f;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+    }
+
+    button:hover { opacity: 0.85; }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #1e1e24;
+    }
+
+    .toggle-label {
+      font-size: 11px;
+      color: #9a9692;
+    }
+
+    .toggle {
+      width: 36px;
+      height: 20px;
+      background: #2a2a30;
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s;
+      border: none;
+    }
+
+    .toggle.active { background: #c4956a; }
+
+    .toggle::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: #e8e4d9;
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.2s;
+    }
+
+    .toggle.active::after { transform: translateX(16px); }
+
+    .status {
+      margin-top: 12px;
+      font-size: 10px;
+      color: #4caf72;
+      text-align: center;
+      height: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">✦</div>
+    <div>
+      <div class="title">Claude</div>
+      <div class="subtitle">Sidebar Extension</div>
+    </div>
+  </div>
+
+  <label for="apiKey">Anthropic API Key</label>
+  <input type="password" id="apiKey" placeholder="sk-ant-..." />
+  <div class="hint">
+    Get your key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>. Stored locally, never shared.
+  </div>
+
+  <button id="saveBtn" >Activate Studdy Buddy</button>
+
+  <div class="toggle-row">
+    <span class="toggle-label">Auto-open sidebar on load</span>
+    <button class="toggle" id="autoToggle"></button>
+  </div>
+
+  <div class="status" id="status"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
