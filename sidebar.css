@@ -1,0 +1,455 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400;500&display=swap');
+
+#claude-ext-sidebar {
+  position: fixed;
+  top: 0;
+  right: -440px;
+  width: 420px;
+  height: 100vh;
+  background: #0d0d0f;
+  border-left: 1px solid #1e1e24;
+  z-index: 2147483647;
+  display: flex;
+  flex-direction: column;
+  font-family: 'DM Mono', monospace;
+  box-shadow: -12px 0 60px rgba(0,0,0,0.5);
+  transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #e8e4d9;
+}
+/* Notes tab – matches sidebar style */
+#claude-ext-notes-area {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #0d0d0f;    /* same as sidebar */
+  color: #e8e4d9;
+  height: 100%;
+  overflow-y: auto;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+#claude-ext-notes-area h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  font-weight: 300;
+  margin: 0 0 12px 0;
+  color: #e8e4d9;
+}
+
+#claude-ext-notes {
+  flex: 1;
+  background: #111115;    /* same as textarea background */
+  border: 1px solid #2a2a30;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #e8e4d9;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  resize: none;
+  outline: none;
+  min-height: 140px;
+}
+
+#claude-ext-notes:focus {
+  border-color: #c4956a;   /* gold border on focus, same as textarea */
+}
+
+#claude-ext-notes::placeholder {
+  color: #3a3a42;
+}
+
+/* If you want it to respect the scrollbars like messages */
+#claude-ext-notes-area::-webkit-scrollbar { width: 4px; }
+#claude-ext-notes-area::-webkit-scrollbar-track { background: transparent; }
+#claude-ext-notes-area::-webkit-scrollbar-thumb { background: #2a2a30; border-radius: 2px; }
+#claude-ext-sidebar.open {
+  right: 0;
+}
+
+#claude-ext-toggle {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 72px;
+  background: linear-gradient(180deg, #c4956a, #d4a57a);
+  border: none;
+  border-radius: 8px 0 0 8px;
+  cursor: pointer;
+  z-index: 2147483646;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: -4px 0 20px rgba(196,149,106,0.3);
+  transition: width 0.2s, right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 16px;
+  writing-mode: vertical-rl;
+  color: #0d0d0f;
+  font-family: 'Fraunces', serif;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+}
+
+#claude-ext-toggle:hover { width: 38px; }
+#claude-ext-toggle.shifted { right: 420px; }
+
+/* Header */
+#claude-ext-header {
+  padding: 18px 20px;
+  border-bottom: 1px solid #1e1e24;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.claude-ext-logo {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #c4956a, #e8b88a);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.claude-ext-tabs {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #e8e4d9;
+  flex: 1;
+}
+
+.claude-ext-title {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #e8e4d9;
+  flex: 1;
+}
+
+.claude-ext-subtitle {
+  font-size: 9px;
+  color: #4a4a52;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+#claude-ext-clear {
+  background: none;
+  border: 1px solid #2a2a30;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: #5a5a62;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#claude-ext-clear:hover {
+  border-color: #c4956a;
+  color: #c4956a;
+}
+
+/* Context bar */
+#claude-ext-context {
+  padding: 10px 20px;
+  background: #111115;
+  border-bottom: 1px solid #1a1a20;
+  font-size: 9px;
+  color: #4a4a52;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.claude-ext-context-dot {
+  width: 5px;
+  height: 5px;
+  background: #c4956a;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+#claude-ext-context-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+/* Messages */
+#claude-ext-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  scroll-behavior: smooth;
+}
+
+#claude-ext-messages::-webkit-scrollbar { width: 4px; }
+#claude-ext-messages::-webkit-scrollbar-track { background: transparent; }
+#claude-ext-messages::-webkit-scrollbar-thumb { background: #2a2a30; border-radius: 2px; }
+
+.claude-ext-msg {
+  max-width: 100%;
+  animation: msgIn 0.25s ease;
+}
+
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.claude-ext-msg-user {
+  align-self: flex-end;
+  background: #1a1a20;
+  border: 1px solid #2a2a30;
+  border-radius: 12px 12px 3px 12px;
+  padding: 10px 14px;
+  font-size: 12px;
+  line-height: 1.6;
+  max-width: 85%;
+  color: #c8c4ba;
+}
+
+.claude-ext-msg-claude {
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+.claude-ext-msg-label {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c4956a;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.claude-ext-msg-label::before {
+  content: '✦';
+  font-size: 8px;
+}
+
+.claude-ext-msg-body {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  line-height: 1.75;
+  color: #c8c4ba;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.claude-ext-msg-body code {
+  background: #1a1a20;
+  border: 1px solid #2a2a30;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 11px;
+  color: #c4956a;
+}
+
+.claude-ext-msg-body pre {
+  background: #111115;
+  border: 1px solid #1e1e24;
+  border-radius: 8px;
+  padding: 14px;
+  overflow-x: auto;
+  margin: 8px 0;
+}
+
+.claude-ext-msg-body pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #9a9692;
+}
+
+/* Typing indicator */
+.claude-ext-typing {
+  display: flex;
+  gap: 4px;
+  padding: 6px 0;
+}
+
+.claude-ext-typing span {
+  width: 5px;
+  height: 5px;
+  background: #c4956a;
+  border-radius: 50%;
+  animation: typing 1.2s infinite;
+}
+
+.claude-ext-typing span:nth-child(2) { animation-delay: 0.2s; }
+.claude-ext-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing {
+  0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+/* Empty state */
+#claude-ext-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #3a3a42;
+  text-align: center;
+  padding: 40px 30px;
+}
+
+#claude-ext-empty .big-symbol {
+  font-size: 36px;
+  opacity: 0.4;
+}
+
+#claude-ext-empty p {
+  font-size: 11px;
+  line-height: 1.7;
+  color: #4a4a52;
+}
+
+/* Input */
+#claude-ext-input-area {
+  padding: 16px 20px;
+  border-top: 1px solid #1e1e24;
+  background: #0d0d0f;
+  flex-shrink: 0;
+}
+
+#claude-ext-input-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+#claude-ext-textarea {
+  flex: 1;
+  background: #111115;
+  border: 1px solid #2a2a30;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #e8e4d9;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  resize: none;
+  outline: none;
+  min-height: 42px;
+  max-height: 120px;
+  transition: border-color 0.2s;
+}
+
+#claude-ext-textarea:focus {
+  border-color: #c4956a;
+}
+
+#claude-ext-textarea::placeholder {
+  color: #3a3a42;
+}
+
+#claude-ext-send {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, #c4956a, #d4a57a);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s, transform 0.1s;
+  font-size: 16px;
+}
+
+#claude-ext-send:hover { opacity: 0.85; }
+#claude-ext-send:active { transform: scale(0.95); }
+#claude-ext-send:disabled { opacity: 0.3; cursor: not-allowed; }
+
+#claude-ext-footer {
+  font-size: 9px;
+  color: #2a2a30;
+  text-align: center;
+  margin-top: 10px;
+  letter-spacing: 0.06em;
+}
+/* Tab bar */
+#claude-ext-tabs {
+  display: flex;
+  border-bottom: 1px solid #1e1e24;
+  background: #0d0d0f;
+  flex-shrink: 0;
+  padding: 0 20px;
+  gap: 4px;
+}
+
+/* Individual tab buttons */
+.claude-ext-tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 10px 12px;
+  color: #4a4a52;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  margin-bottom: -1px; /* overlap the bar's border */
+}
+
+.claude-ext-tab:hover {
+  color: #9a9692;
+}
+
+.claude-ext-tab.active {
+  color: #c4956a;
+  border-bottom-color: #c4956a;
+}
+
+/* Panel container — fills remaining space */
+#claude-ext-tab-panels {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Each panel hidden by default, active one fills space */
+.claude-ext-panel {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.claude-ext-panel.active {
+  display: flex;
+}
