@@ -1,6 +1,6 @@
-# Claude Sidebar Extension
+# Study Buddy Sidebar Extension
 
-Chat with Claude on any webpage — a floating sidebar you can open on any site.
+Chat with an AI assistant on any webpage — a floating sidebar you can open on any site.
 
 ## Installation (Chrome / Edge / Brave)
 
@@ -19,9 +19,9 @@ Chat with Claude on any webpage — a floating sidebar you can open on any site.
 
 ## Usage
 
-- A **Claude** tab appears on the right side of every webpage
+- A **Studdy Buddy** tab appears on the right side of every webpage
 - Click it to open the sidebar
-- Ask anything — Claude can see the page you're on and answer questions about it
+- Ask anything — it can see the page you're on and answer questions about it
 - Press **Enter** to send, **Shift+Enter** for a new line
 - Click **Clear** to start a fresh conversation
 
